@@ -24,6 +24,18 @@
             android:name=".View.NewAccountActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".View.SearchActivity"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".View.AddRecipeActivity"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".View.RecipeActivity"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
