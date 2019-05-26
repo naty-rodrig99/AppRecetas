@@ -16,7 +16,7 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-/*
+
         fl_btn_search1 = (FloatingActionButton) findViewById(R.id.search_fab2);
         fl_btn_search1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,7 +34,6 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-*/
-    }
 
+    }
 }
