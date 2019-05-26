@@ -25,10 +25,6 @@
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".View.ListarRecetas"
-            android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".View.SearchActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme" />
