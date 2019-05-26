@@ -8,4 +8,11 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_listar_recetas">ListarRecetas</string>
+=======
+    <string name="tab_text_1">Recipes</string>
+    <string name="tab_text_2">Search</string>
+    <string name="tab_text_3">Search</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+
+>>>>>>> origin/master
 </resources>
