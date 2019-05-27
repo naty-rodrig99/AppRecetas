@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Create New Account"
+        android:text="Crear nueva cuenta"
         android:textColor="@color/colorAccent"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -38,60 +38,35 @@
         app:layout_constraintVertical_bias="0.554" />
 
     <EditText
-        android:id="@+id/txt_username"
+        android:id="@+id/txt_correo"
         android:layout_width="294dp"
         android:layout_height="wrap_content"
-        android:contentDescription="Username"
+        android:layout_marginTop="288dp"
+        android:contentDescription="Correo"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Correo"
         android:inputType="textPersonName"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
-        android:layout_marginTop="230dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.412" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txt_password"
         android:layout_width="294dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="384dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Contraseña"
         android:inputType="textPassword"
         android:textColor="@android:color/black"
-        android:layout_marginTop="300dp"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/txt_name"
-        android:layout_width="294dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="370dp"
-        android:ems="10"
-        android:hint="Name"
-        android:inputType="textPersonName"
-        android:textColor="@android:color/black"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/txt_email"
-        android:layout_width="294dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="210dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textPersonName"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_signup"
@@ -99,7 +74,7 @@
         android:layout_height="68dp"
         android:background="@drawable/button_style"
 
-        android:text="Create Account"
+        android:text="Crear Cuenta"
         android:textColor="@color/ColorWhite"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

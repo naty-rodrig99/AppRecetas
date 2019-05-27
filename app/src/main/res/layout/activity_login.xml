@@ -55,7 +55,7 @@
     <Button
         android:id="@+id/btn_login"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:background="@drawable/button_style"
 
         android:text="Login"
@@ -69,12 +69,12 @@
         app:layout_constraintVertical_bias="0.859" />
 
     <EditText
-        android:id="@+id/txt_username"
+        android:id="@+id/txt_correo"
         android:layout_width="294dp"
         android:layout_height="wrap_content"
-        android:contentDescription="Username"
+        android:contentDescription="Correo"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Correo"
         android:inputType="textPersonName"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
@@ -89,7 +89,7 @@
         android:layout_width="294dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Contraseña"
         android:inputType="textPassword"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -118,7 +118,7 @@
 
         android:paddingLeft="13dp"
         android:paddingRight="13dp"
-        android:text="Create new account"
+        android:text="Crear nueva cuenta"
         android:textAllCaps="false"
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp"
@@ -129,22 +129,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.953" />
 
-    <Button
-        android:id="@+id/buttonPba"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Prueba"
-        android:onClick="callListarRecetas"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/img_userlogo"
-        app:layout_constraintHorizontal_bias="0.359"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.11" />
 
 
 </android.support.constraint.ConstraintLayout>

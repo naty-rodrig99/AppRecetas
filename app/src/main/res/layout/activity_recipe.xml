@@ -1,30 +1,149 @@
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F2F2F2"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".View.SearchActivity"
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+    <ScrollView
+        xml:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageSwitcher" />
+        android:fillViewport="false">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <ImageSwitcher
-        android:id="@+id/imageSwitcher"
-        android:layout_width="320dp"
-        android:layout_height="320dp"
-        android:layout_gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <ImageSwitcher
+                android:id="@+id/imageSwitcher"
+                android:layout_width="411dp"
+                android:layout_height="300dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp" />
 
-</android.support.constraint.ConstraintLayout>
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="115dp"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/imageSwitcher"
+                android:layout_gravity="center"
+                android:background="@drawable/button_style"
+                android:text="Next"
+                android:textColor="@color/ColorWhite"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvNombre"
+                android:layout_width="395dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="5dp"
+                android:text="Nombre:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btnNext" />
+
+            <TextView
+                android:id="@+id/tvTipo"
+                android:layout_width="395dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="5dp"
+                android:text="Tipo:"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvNombre" />
+
+            <TextView
+                android:id="@+id/tvIngredientes"
+                android:layout_width="395dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="5dp"
+                android:text="Ingredientes:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvTipo" />
+
+            <ScrollView
+                xml:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="false">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tvListaIngredientes"
+                        android:layout_width="395dp"
+                        android:layout_height="182dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Lista Ingredientes:"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tvIngredientes" />
+                </LinearLayout>
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/tvInstrucciones"
+                android:layout_width="395dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="5dp"
+                android:text="Instrucciones:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvListaIngredientes" />
+
+            <ScrollView
+                xml:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="false">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tvListaInstrucciones"
+                        android:layout_width="395dp"
+                        android:layout_height="182dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Lista Instrucciones:"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tvListaInstrucciones" />
+                </LinearLayout>
+            </ScrollView>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
