@@ -98,12 +98,13 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
     }
-    public class Receta{
+    public static class Receta{
         public String nombre;
         public ArrayList ingredientes;
         public String tipo;
         public ArrayList pasos;
         public ArrayList imagenes;
+        Receta(){};
         Receta(String nom,ArrayList ing,String type,ArrayList steps,ArrayList img){
             this.nombre = nom;
             this.ingredientes = ing;
@@ -114,7 +115,7 @@ public class MenuActivity extends AppCompatActivity {
 
     }
 
-    public ArrayList convertidorArrays(JSONArray arr){
+    public static ArrayList convertidorArrays(JSONArray arr){
         ArrayList<String> resul = new ArrayList<String>();
         int cont=0;
         while(cont < arr.length()){

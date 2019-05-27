@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void callListarRecetas(View v){
-        startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+        startActivity(new Intent(LoginActivity.this, SearchActivity.class));
     }
 
 }
