@@ -37,5 +37,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    public void call(View v){
+        startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+    }
+
 
 }

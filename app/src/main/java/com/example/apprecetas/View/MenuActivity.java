@@ -71,7 +71,7 @@ public class MenuActivity extends AppCompatActivity {
     public void onStart(){
         super.onStart();
         run();
-        System.out.println("Aqui");
+        System.out.println(conversorDirecciones("Pollito,JPG"));
     }
 
 
@@ -133,6 +133,12 @@ public class MenuActivity extends AppCompatActivity {
 
         }
         return resul;
+
+    }
+    public static String conversorDirecciones(String nombreImagen){
+        String head = "https://s3.us-east-2.amazonaws.com/progralenguajes/";
+        String nuevoNom = nombreImagen.replace(",",".");
+        return(head+nuevoNom);
 
     }
 

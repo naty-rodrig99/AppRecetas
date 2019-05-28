@@ -55,6 +55,19 @@
         android:clickable="true"
         android:background="@color/colorAccentLight"
         app:srcCompat="@drawable/search" />
+    <ImageView
+        android:id="@+id/imageView_imagen"
+        android:layout_width="150dp"
+        android:layout_height="200dp"/>
+
+    <TextView
+        android:id="@+id/textView_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/imageView_imagen"
+        android:layout_margin="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
 
 </android.support.design.widget.CoordinatorLayout>
