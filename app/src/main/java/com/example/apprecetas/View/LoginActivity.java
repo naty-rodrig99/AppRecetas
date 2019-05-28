@@ -51,7 +51,9 @@ public class LoginActivity extends AppCompatActivity {
     public void callMenu(View v){
         startActivity(new Intent(LoginActivity.this, MenuActivity.class));
     }
-
+    public void callRegistro(View v){
+        startActivity(new Intent(LoginActivity.this, NewAccountActivity.class));
+    }
 
     public void iniciarSesion(View v){
         String correo = getMail();
