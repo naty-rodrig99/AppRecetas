@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:background="@drawable/button_style"
-
+        android:onClick="iniciarSesion"
         android:text="Login"
         android:textColor="@color/ColorWhite"
         android:textSize="18sp"
@@ -69,7 +69,7 @@
         app:layout_constraintVertical_bias="0.859" />
 
     <EditText
-        android:id="@+id/txt_correo"
+        android:id="@+id/txt_correo2"
         android:layout_width="294dp"
         android:layout_height="wrap_content"
         android:contentDescription="Correo"
@@ -85,7 +85,7 @@
         app:layout_constraintVertical_bias="0.412" />
 
     <EditText
-        android:id="@+id/txt_password"
+        android:id="@+id/txt_password2"
         android:layout_width="294dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -132,7 +132,7 @@
     <Button
         android:id="@+id/buttonPba"
         android:layout_width="wrap_content"
-        android:onClick="call"
+        android:onClick="callMenu"
         android:layout_height="35dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

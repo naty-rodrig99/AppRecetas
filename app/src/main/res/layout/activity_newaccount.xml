@@ -11,11 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="90dp"
+        android:layout_marginBottom="8dp"
         android:text="Crear nueva cuenta"
         android:textColor="@color/colorAccent"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginTop="90dp"
+        app:layout_constraintBottom_toTopOf="@+id/img_dishes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -38,42 +40,45 @@
         app:layout_constraintVertical_bias="0.554" />
 
     <EditText
-        android:id="@+id/txt_correo"
+        android:id="@+id/txt_correo2"
         android:layout_width="294dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="288dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="Correo"
         android:ems="10"
         android:hint="Correo"
         android:inputType="textPersonName"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/txt_password2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/img_dishes" />
 
     <EditText
-        android:id="@+id/txt_password"
+        android:id="@+id/txt_password2"
         android:layout_width="294dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="384dp"
+        android:layout_marginBottom="148dp"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
         android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/img_dishes"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toRightOf="parent" />
 
 
     <Button
         android:id="@+id/btn_signup"
         android:layout_width="221dp"
         android:layout_height="68dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/button_style"
-
+        android:onClick="registrar"
         android:text="Crear Cuenta"
         android:textColor="@color/ColorWhite"
         android:textSize="18sp"
@@ -81,7 +86,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.859" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_password2" />
 
 </android.support.constraint.ConstraintLayout>
