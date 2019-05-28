@@ -14,6 +14,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         System.out.println("AQUIIIIII");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addrecipe);
+
         ImageView img = findViewById(R.id.imgV);
         String url="https://s3.us-east-2.amazonaws.com/progralenguajes/pollo.jpg";
         Picasso.get().load(url).into(img);

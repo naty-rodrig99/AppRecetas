@@ -77,6 +77,7 @@ public class MenuActivity extends AppCompatActivity {
 
     public void run() {
         try {
+            recetas.clear();
             String api = "https://api-receta.herokuapp.com/";
             URL url = new URL(api + "listarTodo");
             HttpURLConnection urlConnection = null;
@@ -102,6 +103,7 @@ public class MenuActivity extends AppCompatActivity {
                     Receta recipe = new Receta(nom,ing,type,steps,img);
                     recetas.add(recipe);
                     cont++;
+                    System.out.println(img);
                 }
                 RecyclerView.Adapter mAdapter = new ListAdapter(recetas.toArray(new Receta[recetas.size()]));
                 recyclerView.setAdapter(mAdapter);
@@ -138,7 +140,7 @@ public class MenuActivity extends AppCompatActivity {
     public static String conversorDirecciones(String nombreImagen){
         String head = "https://s3.us-east-2.amazonaws.com/progralenguajes/";
         String nuevoNom = nombreImagen.replace(",",".");
-        return(head+nuevoNom);
+        return(head+nuevoNom+".JPG");
 
     }
 

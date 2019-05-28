@@ -1,10 +1,12 @@
 package com.example.apprecetas.View;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,9 +19,10 @@ import java.util.ArrayList;
 
 public class RecipeActivity extends AppCompatActivity {
 
-    //int[] imagenes = {R.drawable.pizza,R.drawable.dishes,R.drawable.enano};
-    private ArrayList imagenes = new ArrayList();
+    private ArrayList img = new ArrayList();
     private int index = 0;
+    private ArrayList xx = new ArrayList();
+    private int[] prueba = {R.drawable.pizza, R.drawable.dishes, R.drawable.enano};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +33,21 @@ public class RecipeActivity extends AppCompatActivity {
         String tipo= "";
         String ingredientes="";
         String instrucciones="";
-        //ArrayList imagenes ;
+        String imagenes = "" ;
+        Parcelable holi;
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
             nombre = extras.getString("nombre");
             tipo = extras.getString("tipo");
             ingredientes = extras.getString("ingredientes");
             instrucciones = extras.getString("instrucciones");
-            imagenes = extras.getStringArrayList("imagenes");
+            imagenes = extras.getString("imagenes");
         }
+        img = convierteImagenes (imagenes);
+
+        System.out.println("XX:" + xx);
+        System.out.println("AA"+ xx.get(0));
+        //System.out.println(xx.get(1));
         //ImageView imageView1 = (ImageView) findViewById(R.id.imageView1);
         //Picasso.get().load(gettingImageUrl).into(imageView1);
 
@@ -69,7 +78,10 @@ public class RecipeActivity extends AppCompatActivity {
                     return imageView;
                 }
             });
-            //imageSwitcher.setImageResource(Picasso.get().load(imagenes.get(index)));
+            String imagen = MenuActivity.conversorDirecciones(img.get(index).toString());
+            //Picasso.get().load(imagen).into(holder.imgView);
+
+            //imageSwitcher.setImageUrL(Picasso.get().load(imagen));
 
             Animation in = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
             imageSwitcher.setInAnimation(in);
@@ -77,17 +89,58 @@ public class RecipeActivity extends AppCompatActivity {
             Animation out = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
             imageSwitcher.setOutAnimation(out);
         }
-        /*Button button = findViewById(R.id.btnNext);
+        Button button = findViewById(R.id.btnNext);
         if(button != null){
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    index = (++index < imagenes.size()) ? index : 0;
+                    index = (++index < prueba.length) ? index : 0;
                     if(imageSwitcher != null){
-                        imageSwitcher.setImageResource(imagenes.get(index));
+                        imageSwitcher.setImageResource(prueba[index]);
                     }
                 }
             });
-        } */
+        }
+    }
+
+
+    public ArrayList convierteImagenes(String imagenes){
+        String palabra = "";
+        int a = 1;
+        for (int n = 0; n < imagenes.length (); n ++){
+            if(imagenes.substring(n,a).equals(",")){
+                img.add(palabra);
+                palabra = "";
+                a += 1;
+            } else{
+                if (imagenes.substring(n,a).equals("[") || imagenes.substring(n,a).equals("]") || imagenes.substring(n,a).equals(" ")) {
+                    a += 1;
+                } else {
+                    palabra += imagenes.substring(n, a);
+                    a += 1;
+                }
+            }
+        }
+        img.add(palabra);
+        return img;
+    }
+
+    public ArrayList convierteImagenes1(String imagenes){
+        String palabra = "";
+        int a = 1;
+        for (int n = 0; n < imagenes.length (); n ++){
+            //if(imagenes.substring(n) != ",") {
+                palabra += imagenes.substring(n,a);
+                System.out.println("Letra:" + imagenes.substring(n,a));
+                a += 1;
+            //}else{
+                //img.add(palabra);
+                //System.out.println("Palabra:",palabra.);
+                //palabra = "";
+            //}
+        }
+        img.add(palabra);
+        //img.add(palabra);
+        return img;
     }
 }

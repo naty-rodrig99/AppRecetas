@@ -11,8 +11,6 @@ import android.widget.TextView;
 import com.example.apprecetas.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private Receta[] recetas;
 
@@ -51,12 +49,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final Receta receta = recetas[position];
         holder.textView1.setText(receta.getNombre());
         holder.textView2.setText(receta.getTipo());
         String imagen = MenuActivity.conversorDirecciones(receta.getImagenes().get(0).toString());
         Picasso.get().load(imagen).into(holder.imgView);
+
+        //System.out.println(receta.getImagenes().get(0).toString());
         //Si selecciona una receta:
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,11 +66,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 intent.putExtra("tipo", "Tipo: "+ receta.getTipo());
                 intent.putExtra("ingredientes", receta.getIngredientes().toString());
                 intent.putExtra("instrucciones", receta.getPasos().toString());
-                intent.putExtra("imagenes",(ArrayList)receta.getImagenes());
+                intent.putExtra("imagenes", receta.getImagenes().toString());
+                //intent.putExtra("recetas", (Parcelable) recetas[position]);
                 v.getContext().startActivity(intent);
             }
         });
+        //System.out.println("Aqui:" + receta.getImagenes().get(1));
     }
+
+
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class NewAccountActivity extends AppCompatActivity {
+    Button btn_newaccount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +59,7 @@ public class NewAccountActivity extends AppCompatActivity {
     public void registrar(View v){
         String correo = getMail();
         String password = getPassword();
-        if (validateEmail(correo)){
+        //if (validateEmail(correo)){
             if(password.length()>=4){
                 try {
                     String api = "https://api-receta.herokuapp.com/";
@@ -96,9 +98,9 @@ public class NewAccountActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }
         }
-        else{
-            Toast.makeText(NewAccountActivity.this, "Error: Formato de correo invalido.", Toast.LENGTH_LONG).show();
-        }
+        //else{
+         //   Toast.makeText(NewAccountActivity.this, "Error: Formato de correo invalido.", Toast.LENGTH_LONG).show();
+        //}
 
-    }
+    //}
 }
