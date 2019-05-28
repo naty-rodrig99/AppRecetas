@@ -10,7 +10,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="145dp"
+        android:layout_height="200dp"
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/margin10"
         android:layout_marginTop="8dp"
@@ -25,9 +25,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="131dp"
+            android:layout_height="178dp"
             android:baselineAligned="false"
             android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/item_img"
+                android:layout_width="match_parent"
+                android:layout_height="111dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/item_text1"
