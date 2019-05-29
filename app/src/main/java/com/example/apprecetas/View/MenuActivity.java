@@ -45,7 +45,7 @@ public class MenuActivity extends AppCompatActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        pruebas();
+
         recyclerView = findViewById(R.id.list_view);
         recyclerView.setHasFixedSize(true);
 
@@ -76,7 +76,7 @@ public class MenuActivity extends AppCompatActivity {
     public void onStart(){
         super.onStart();
         run();
-        System.out.println(conversorDirecciones("Pollito,JPG"));
+
     }
 
 
@@ -149,48 +149,6 @@ public class MenuActivity extends AppCompatActivity {
 
     }
 
-    public void pruebas(){
-        try {
-            String filepath = "C/Users/derec/Desktop/pollo.jpg";
-            File imagefile = new File(filepath);
-            FileInputStream fis = null;
-            try {
-                fis = new FileInputStream(imagefile);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            Bitmap bm = BitmapFactory.decodeStream(fis);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] b = baos.toByteArray();
-            String s = Base64.encodeToString(b, Base64.DEFAULT);
-            JSONObject o = new JSONObject();
-            try {
-                o.put("id", s);
-                String api = "https://api-receta.herokuapp.com/";
-                URL url = new URL(api + "cargarImagenes");
-                HttpURLConnection urlConnection = null;
-                urlConnection = (HttpURLConnection) url.openConnection();
-                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                StringBuilder be = new StringBuilder();
-                String input;
 
-
-                while ((input = br.readLine()) != null) {
-                    be.append(input);
-                }
-                System.out.println("-------------------------------------Tipo:"+be.toString());
-
-            } catch (JSONException e) {
-                Log.e("MYAPP", "unexpected JSON exception", e);
-            }
-        }catch(IOException e){
-
-        }
-
-
-
-
-    }
 
 }

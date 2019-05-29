@@ -7,22 +7,15 @@
     android:layout_height="match_parent">
 
     <ScrollView
-        xml:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="false">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:fillViewport="false"
+        xml:android="http://schemas.android.com/apk/res/android">
 
-            <ImageSwitcher
-                android:id="@+id/imageSwitcher"
-                android:layout_width="411dp"
-                android:layout_height="300dp"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btnNext"
@@ -62,6 +55,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tvNombre" />
 
+            <ImageSwitcher
+                android:id="@+id/imageSwitcher"
+                android:layout_width="411dp"
+                android:layout_height="300dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp" />
+
             <TextView
                 android:id="@+id/tvIngredientes"
                 android:layout_width="395dp"
@@ -77,14 +78,15 @@
                 app:layout_constraintTop_toTopOf="@+id/tvTipo" />
 
             <ScrollView
-                xml:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fillViewport="false">
+                android:fillViewport="false"
+                xml:android="http://schemas.android.com/apk/res/android">
+
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvListaIngredientes"
@@ -116,14 +118,15 @@
                 app:layout_constraintTop_toTopOf="@+id/tvListaIngredientes" />
 
             <ScrollView
-                xml:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fillViewport="false">
+                android:fillViewport="false"
+                xml:android="http://schemas.android.com/apk/res/android">
+
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvListaInstrucciones"
@@ -139,7 +142,6 @@
                         app:layout_constraintTop_toTopOf="@+id/tvListaInstrucciones" />
                 </LinearLayout>
             </ScrollView>
-
 
 
         </LinearLayout>

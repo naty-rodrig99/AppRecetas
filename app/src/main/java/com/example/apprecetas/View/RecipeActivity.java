@@ -21,7 +21,6 @@ public class RecipeActivity extends AppCompatActivity {
 
     private ArrayList<String> img = new ArrayList();
     private int index = 0;
-    private ArrayList xx = new ArrayList();
     private int[] prueba = {R.drawable.pizza, R.drawable.dishes, R.drawable.enano};
     private String[] prueba1;
 
@@ -49,11 +48,6 @@ public class RecipeActivity extends AppCompatActivity {
         String[] stockArr = new String[img.size()];
         stockArr = img.toArray(stockArr);
 
-        System.out.println("XX:" + xx);
-        System.out.println("AA"+ xx.get(0));
-        //System.out.println(xx.get(1));
-        //ImageView imageView1 = (ImageView) findViewById(R.id.imageView1);
-        //Picasso.get().load(gettingImageUrl).into(imageView1);
 
         TextView tvNombre = (TextView) findViewById(R.id.tvNombre);
         tvNombre.setText(nombre);
