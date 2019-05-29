@@ -1,7 +1,6 @@
 package com.example.apprecetas.View;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
@@ -14,15 +13,17 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.example.apprecetas.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class RecipeActivity extends AppCompatActivity {
 
-    private ArrayList img = new ArrayList();
+    private ArrayList<String> img = new ArrayList();
     private int index = 0;
     private ArrayList xx = new ArrayList();
     private int[] prueba = {R.drawable.pizza, R.drawable.dishes, R.drawable.enano};
+    private String[] prueba1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,6 @@ public class RecipeActivity extends AppCompatActivity {
         String ingredientes="";
         String instrucciones="";
         String imagenes = "" ;
-        Parcelable holi;
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
             nombre = extras.getString("nombre");
@@ -44,6 +44,10 @@ public class RecipeActivity extends AppCompatActivity {
             imagenes = extras.getString("imagenes");
         }
         img = convierteImagenes (imagenes);
+        prueba1 = new String[img.size()];
+
+        String[] stockArr = new String[img.size()];
+        stockArr = img.toArray(stockArr);
 
         System.out.println("XX:" + xx);
         System.out.println("AA"+ xx.get(0));
@@ -78,10 +82,10 @@ public class RecipeActivity extends AppCompatActivity {
                     return imageView;
                 }
             });
-            String imagen = MenuActivity.conversorDirecciones(img.get(index).toString());
+            //String imagen = MenuActivity.conversorDirecciones(img.get(index).toString());
             //Picasso.get().load(imagen).into(holder.imgView);
 
-            //imageSwitcher.setImageUrL(Picasso.get().load(imagen));
+            //imageSwitcher.setImageURI(imagen);
 
             Animation in = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
             imageSwitcher.setInAnimation(in);
@@ -94,9 +98,10 @@ public class RecipeActivity extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    index = (++index < prueba.length) ? index : 0;
+                    index = (++index < img.size()) ? index : 0;
                     if(imageSwitcher != null){
-                        imageSwitcher.setImageResource(prueba[index]);
+                        //imageSwitcher.setImageResource(prueba[index]);
+                        Picasso.get().load(MenuActivity.conversorDirecciones(img.get(index).toString()));
                     }
                 }
             });
@@ -125,22 +130,4 @@ public class RecipeActivity extends AppCompatActivity {
         return img;
     }
 
-    public ArrayList convierteImagenes1(String imagenes){
-        String palabra = "";
-        int a = 1;
-        for (int n = 0; n < imagenes.length (); n ++){
-            //if(imagenes.substring(n) != ",") {
-                palabra += imagenes.substring(n,a);
-                System.out.println("Letra:" + imagenes.substring(n,a));
-                a += 1;
-            //}else{
-                //img.add(palabra);
-                //System.out.println("Palabra:",palabra.);
-                //palabra = "";
-            //}
-        }
-        img.add(palabra);
-        //img.add(palabra);
-        return img;
-    }
 }
