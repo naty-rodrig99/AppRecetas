@@ -1,6 +1,6 @@
 package com.example.apprecetas.View;
 
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +28,7 @@ public class SearchActivity extends AppCompatActivity {
     RadioButton nombre,tipo,ingrediente;
     EditText eBuscar;
     public static ArrayList<Receta> resultado = new ArrayList<>();
+    public String palabra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +46,21 @@ public class SearchActivity extends AppCompatActivity {
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String result = "Selecciono: ";
-                result += (nombre.isChecked())?"Nombre":(tipo.isChecked())?"Tipo":(ingrediente.isChecked())?"Ingrediente":"";
-                Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
+                palabra = eBuscar.getText().toString();
+                String result = "";
+                result += (nombre.isChecked())?"nombre":(tipo.isChecked())?"tipo":(ingrediente.isChecked())?"ingrediente":"";
+                Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
+                System.out.println("Palabra:"+ palabra);
+                System.out.println("Tipo:"+result);
+                intent.putExtra("nombre", palabra);
+                intent.putExtra("tipo", result);
+                startActivity(intent);
+
+                //String result = "Selecciono: ";
+                //result += (nombre.isChecked())?"Nombre":(tipo.isChecked())?"Tipo":(ingrediente.isChecked())?"Ingrediente":"";
+                //Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
             }
         });
-        resultadoBusqueda("tipico", "tipo"); //Prueba de busqueda
 
     }
     public void onRadioButtonClicked(View view){
@@ -72,24 +82,25 @@ public class SearchActivity extends AppCompatActivity {
         }
         Toast.makeText(getApplicationContext(),str,Toast.LENGTH_SHORT).show();
     }
+
     public void resultadoBusqueda(final String nombre, final String tipo){
         resultado.clear();
 
         try {
             String api = "https://api-receta.herokuapp.com/";
             URL url = new URL(api) ;
-            if(tipo == "nombre") {
+            if(tipo.equals("nombre")) {
                 String str=api + "buscarNombre?nombre="+nombre;
                 str = str.replace(" ","-");
                 url = new URL(str);
 
             }
-            if(tipo == "tipo") {
+            if(tipo.equals("tipo")) {
                 String str=api + "buscarTipo?tipo="+nombre;
                 str = str.replace(" ","-");
                 url = new URL(str);
             }
-            if(tipo == "ingrediente") {
+            if(tipo.equals("ingrediente")) {
                 String str=api + "buscarIngrediente?nombre="+nombre;
                 str = str.replace(" ","-");
                 url = new URL(str);
@@ -114,26 +125,26 @@ public class SearchActivity extends AppCompatActivity {
                 Receta recipe = new Receta();
                 while(cont< j.length()) {
                     JSONObject o = j.getJSONObject(cont);      //Prueba de recibir el JSON
-                    if (tipo != "nombre") {
+                    if (!tipo.equals("nombre")) {
                         nom = (String) o.get("NOM");
 
                     }
                     ArrayList ing = MenuActivity.convertidorArrays((JSONArray)o.get("ING"));
 
-                    if(tipo != "tipo") {
+                    if(!tipo.equals("tipo")) {
                         type = (String) o.get("TYPE");
                     }
                     ArrayList steps = MenuActivity.convertidorArrays((JSONArray)o.get("STEPS"));
                     ArrayList img = MenuActivity.convertidorArrays((JSONArray)o.get("IMAGES"));
-                    if(tipo =="ingrediente") {
+                    if(tipo.equals("ingrediente")) {
                         recipe = new Receta(nom, ing, type, steps, img);
                         System.out.println(recipe);
                     }
-                    if(tipo == "nombre" ) {
+                    if(tipo.equals("nombre")) {
                         recipe = new Receta(nombre, ing, type, steps, img);
 
                     }
-                    if(tipo == "tipo" ) {
+                    if(tipo.equals("tipo")) {
                         recipe = new Receta(nom, ing, tipo, steps, img);
 
                     }

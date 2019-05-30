@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void callMenu(View v){
-        startActivity(new Intent(LoginActivity.this,AddRecipeActivity.class));
+        startActivity(new Intent(LoginActivity.this,MenuActivity.class));
     }
     public void callRegistro(View v){
         startActivity(new Intent(LoginActivity.this, NewAccountActivity.class));

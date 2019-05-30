@@ -42,6 +42,10 @@
             android:name=".View.AddRecipeActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".View.SearchResultActivity"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/AppTheme" />
         <service android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService" android:enabled="true" />
     </application>
 

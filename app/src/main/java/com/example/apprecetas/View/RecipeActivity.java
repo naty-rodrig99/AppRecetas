@@ -20,6 +20,7 @@ public class RecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
 
+        //img.clear();
         String nombre = "";
         String tipo = "";
         String ingredientes = "";
@@ -33,7 +34,7 @@ public class RecipeActivity extends AppCompatActivity {
             instrucciones = extras.getString("instrucciones");
             imagenes = extras.getString("imagenes");
         }
-
+        img = convierteImagenes(imagenes);
         String[] finalImagenes = new String[img.size()];
         finalImagenes = img.toArray(finalImagenes);
 
@@ -49,7 +50,7 @@ public class RecipeActivity extends AppCompatActivity {
         TextView tvListaInstrucciones = (TextView) findViewById(R.id.tvListaInstrucciones);
         tvListaInstrucciones.setText(instrucciones.replace("[", "").replace("]", ""));
 
-        img = convierteImagenes(imagenes);
+        //img = convierteImagenes(imagenes);
         viewPager = (ViewPager)findViewById(R.id.viewPager1);
         adapter = new ViewPagerAdapter(RecipeActivity.this, finalImagenes);
         viewPager.setAdapter(adapter);
