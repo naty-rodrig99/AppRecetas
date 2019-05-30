@@ -43,6 +43,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ import java.util.UUID;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class AddRecipeActivity extends AppCompatActivity {
+    ArrayList<String>nameImages = new ArrayList<>();
     Button selectButton;
     String[] galleryPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}; //Permisos!!
     @Override
@@ -235,10 +237,11 @@ public class AddRecipeActivity extends AppCompatActivity {
             String extenstion = s[s.length - 1];
             Log.d("messge", "set content length : " + file.length() + "sss" + extenstion);
             String fileName = UUID.randomUUID().toString().replace("-","");
+
             PutObjectRequest putObjectRequest = new PutObjectRequest("progralenguajes",  fileName + "." + "JPG", stream, objectMetadata).withCannedAcl(CannedAccessControlList.PublicRead);
             PutObjectResult result = s3Client.putObject(putObjectRequest);
-            Toast.makeText(AddRecipeActivity.this, "Imagen cargada con exito!", Toast.LENGTH_LONG).show();
-
+            //Toast.makeText(AddRecipeActivity.this, "Imagen cargada con exito!", Toast.LENGTH_LONG).show();
+            nameImages.add(fileName);
             if (result == null) {
 
                 System.out.println("RESULT "+ "NULL");
@@ -300,20 +303,21 @@ public class AddRecipeActivity extends AppCompatActivity {
             }
             else {
                 cont++;
-                arr.add(acu);
+                arr.add("'"+acu+"'");
                 acu = "";
             }
         }
         return arr;
     }
-    public void iniciarSesion(View v){
+    public void agregarReceta(View v){
         String name = getNameReceta();
         String type = getTypeReceta();
         ArrayList<String> pasos = pasosIngredientesString(getNameReceta());
         ArrayList<String> ingred = pasosIngredientesString(getTypeReceta());
+
         try {
             String api = "https://api-receta.herokuapp.com/";
-            String r = "receta(name+type)";
+            //String r = "receta("+"'"+name+"'"+ingred+"'"+type+"'"+pasos+)";
             URL url = new URL(api + "agregarReceta?receta=");
             HttpURLConnection urlConnection = null;
             urlConnection = (HttpURLConnection) url.openConnection();
