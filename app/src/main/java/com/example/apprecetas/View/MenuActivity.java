@@ -13,20 +13,22 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import java.io.File;
+
 import com.example.apprecetas.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class MenuActivity extends AppCompatActivity {
@@ -161,7 +163,6 @@ public class MenuActivity extends AppCompatActivity {
             }
             Bitmap bm = BitmapFactory.decodeStream(fis);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] b = baos.toByteArray();
             String s = Base64.encodeToString(b, Base64.DEFAULT);
             JSONObject o = new JSONObject();

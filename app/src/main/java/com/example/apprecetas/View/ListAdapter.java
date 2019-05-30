@@ -55,8 +55,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         holder.textView2.setText(receta.getTipo());
         String imagen = MenuActivity.conversorDirecciones(receta.getImagenes().get(0).toString());
         Picasso.get().load(imagen).into(holder.imgView);
-
-        //System.out.println(receta.getImagenes().get(0).toString());
         //Si selecciona una receta:
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,14 +65,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 intent.putExtra("ingredientes", receta.getIngredientes().toString());
                 intent.putExtra("instrucciones", receta.getPasos().toString());
                 intent.putExtra("imagenes", receta.getImagenes().toString());
-                //intent.putExtra("recetas", (Parcelable) recetas[position]);
                 v.getContext().startActivity(intent);
             }
         });
-        //System.out.println("Aqui:" + receta.getImagenes().get(1));
     }
-
-
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override

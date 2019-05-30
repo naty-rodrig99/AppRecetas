@@ -1,29 +1,19 @@
 package com.example.apprecetas.View;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.ImageSwitcher;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.ViewSwitcher;
 
 import com.example.apprecetas.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class RecipeActivity extends AppCompatActivity {
 
     private ArrayList<String> img = new ArrayList();
-    private int index = 0;
-    private ArrayList xx = new ArrayList();
-    private int[] prueba = {R.drawable.pizza, R.drawable.dishes, R.drawable.enano};
-    private String[] prueba1;
+    ViewPager viewPager;
+    ViewPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,29 +21,21 @@ public class RecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe);
 
         String nombre = "";
-        String tipo= "";
-        String ingredientes="";
-        String instrucciones="";
-        String imagenes = "" ;
+        String tipo = "";
+        String ingredientes = "";
+        String instrucciones = "";
+        String imagenes = "";
         Bundle extras = getIntent().getExtras();
-        if(extras!=null){
+        if (extras != null) {
             nombre = extras.getString("nombre");
             tipo = extras.getString("tipo");
             ingredientes = extras.getString("ingredientes");
             instrucciones = extras.getString("instrucciones");
             imagenes = extras.getString("imagenes");
         }
-        img = convierteImagenes (imagenes);
-        prueba1 = new String[img.size()];
 
-        String[] stockArr = new String[img.size()];
-        stockArr = img.toArray(stockArr);
-
-        System.out.println("XX:" + xx);
-        System.out.println("AA"+ xx.get(0));
-        //System.out.println(xx.get(1));
-        //ImageView imageView1 = (ImageView) findViewById(R.id.imageView1);
-        //Picasso.get().load(gettingImageUrl).into(imageView1);
+        String[] finalImagenes = new String[img.size()];
+        finalImagenes = img.toArray(finalImagenes);
 
         TextView tvNombre = (TextView) findViewById(R.id.tvNombre);
         tvNombre.setText(nombre);
@@ -62,52 +44,16 @@ public class RecipeActivity extends AppCompatActivity {
         tvTipo.setText(tipo);
 
         TextView tvListaIngredinetes = (TextView) findViewById(R.id.tvListaIngredientes);
-        tvListaIngredinetes.setText(ingredientes.replace("[","").replace("]",""));
+        tvListaIngredinetes.setText(ingredientes.replace("[", "").replace("]", ""));
 
         TextView tvListaInstrucciones = (TextView) findViewById(R.id.tvListaInstrucciones);
-        tvListaInstrucciones.setText(instrucciones.replace("[","").replace("]",""));
+        tvListaInstrucciones.setText(instrucciones.replace("[", "").replace("]", ""));
 
-
-        //Imagenes
-        final ImageSwitcher imageSwitcher = findViewById(R.id.imageSwitcher);
-        if(imageSwitcher != null){
-            imageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
-                @Override
-                public View makeView() {
-                    ImageView imageView = new ImageView(getApplicationContext());
-                    imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                    imageView.setLayoutParams(new
-                            ImageSwitcher.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT));
-                    return imageView;
-                }
-            });
-            //String imagen = MenuActivity.conversorDirecciones(img.get(index).toString());
-            //Picasso.get().load(imagen).into(holder.imgView);
-
-            //imageSwitcher.setImageURI(imagen);
-
-            Animation in = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
-            imageSwitcher.setInAnimation(in);
-
-            Animation out = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
-            imageSwitcher.setOutAnimation(out);
-        }
-        Button button = findViewById(R.id.btnNext);
-        if(button != null){
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    index = (++index < img.size()) ? index : 0;
-                    if(imageSwitcher != null){
-                        //imageSwitcher.setImageResource(prueba[index]);
-                        Picasso.get().load(MenuActivity.conversorDirecciones(img.get(index).toString()));
-                    }
-                }
-            });
-        }
+        img = convierteImagenes(imagenes);
+        viewPager = (ViewPager)findViewById(R.id.viewPager1);
+        adapter = new ViewPagerAdapter(RecipeActivity.this, finalImagenes);
+        viewPager.setAdapter(adapter);
     }
-
 
     public ArrayList convierteImagenes(String imagenes){
         String palabra = "";
