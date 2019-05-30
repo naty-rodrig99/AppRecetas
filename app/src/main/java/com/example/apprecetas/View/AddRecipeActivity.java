@@ -3,6 +3,7 @@ package com.example.apprecetas.View;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,11 +13,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.amazonaws.ClientConfiguration;
@@ -40,6 +43,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -67,7 +71,7 @@ public class AddRecipeActivity extends AppCompatActivity {
 
 
     public void SelectImage() {
-        final CharSequence[] options = {"Capture image", "Select from gallery"};
+        final CharSequence[] options = {"Select from gallery"};
         AlertDialog.Builder builder = new AlertDialog.Builder(AddRecipeActivity.this);
         builder.setTitle("Select");
         builder.setCancelable(true);
@@ -94,10 +98,7 @@ public class AddRecipeActivity extends AppCompatActivity {
                         EasyPermissions.requestPermissions(this, "Access for storage",
                                 101, galleryPermissions);
                     }
-
-
                 }
-
             }
         });
         builder.show();
@@ -164,7 +165,6 @@ public class AddRecipeActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             } else if (requestCode == 2) {
-                System.out.println("Si es AQUII38");
 
                 Uri selectedImage = data.getData();
                 String[] filePath = {MediaStore.Images.Media.DATA};
@@ -180,7 +180,6 @@ public class AddRecipeActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-
                             uploadImageToAWS(picturePath);
 
                         } catch (Exception e) {
@@ -214,9 +213,7 @@ public class AddRecipeActivity extends AppCompatActivity {
 
             clientConfig.setSocketTimeout(60000);
 
-            BasicAWSCredentials credentials = new BasicAWSCredentials("AKIA4MQWCJJINA4QH3HD", "aEpdmLTNB1iGhb9GNA6gOjYsi2hRdLThiIr8uqJH");
-            //Naty:
-            //BasicAWSCredentials credentials = new BasicAWSCredentials("AKIA4MQWCJJIMCERQG76", "QXTONGbKhSRliiysHUp0jShrtQsNy3/RZRrCbshY");
+            BasicAWSCredentials credentials = new BasicAWSCredentials("AKIA4MQWCJJIILNQVDEP", "4+v1M2jFsWxlmJZ2caW9C2Cr0Siu5dGgNhp5bkXp");
 
             s3Client = new AmazonS3Client(credentials, clientConfig);
 
@@ -239,7 +236,7 @@ public class AddRecipeActivity extends AppCompatActivity {
             PutObjectRequest putObjectRequest = new PutObjectRequest("progralenguajes",  fileName + "." + "JPG", stream, objectMetadata).withCannedAcl(CannedAccessControlList.PublicRead);
             PutObjectResult result = s3Client.putObject(putObjectRequest);
             //Toast.makeText(AddRecipeActivity.this, "Imagen cargada con exito!", Toast.LENGTH_LONG).show();
-            nameImages.add(fileName);
+            nameImages.add("'"+fileName+"'");
             if (result == null) {
 
                 System.out.println("RESULT "+ "NULL");
@@ -290,7 +287,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         String res = ed.getText().toString();
         return res;
     }
-    public ArrayList<String> pasosIngredientesString(String s){
+    public String pasosString(String s){
         int cont =0;
         String acu= "";
         ArrayList<String> arr = new ArrayList<>();
@@ -305,18 +302,43 @@ public class AddRecipeActivity extends AppCompatActivity {
                 acu = "";
             }
         }
-        return arr;
+        arr.add("'"+acu+"'");
+        String res = arr.toString().replace(", ",",");
+        return res;
     }
+    public String ingredString(String s){
+        int cont = 0;
+        String acu ="";
+        ArrayList<String> arr = new ArrayList<>();
+        while(cont< s.length()){
+            if(s.charAt(cont) != ','){
+                acu += s.charAt(cont);
+                cont++;
+            }
+            else {
+                cont++;
+                arr.add("'"+acu+"'");
+                acu = "";
+            }
+        }
+        arr.add("'"+acu+"'");
+        String res = arr.toString().replace(", ",",");
+        return res;
+    }
+
+
+
     public void agregarReceta(View v){
         String name = getNameReceta();
         String type = getTypeReceta();
-        ArrayList<String> pasos = pasosIngredientesString(getNameReceta());
-        ArrayList<String> ingred = pasosIngredientesString(getTypeReceta());
-
+        String pasos = pasosString(getPasosReceta());
+        String ingred = pasosString(getIngredientes());
+        String img = nameImages.toString().replace(", ",",");
         try {
             String api = "https://api-receta.herokuapp.com/";
-            //String r = "receta("+"'"+name+"'"+ingred+"'"+type+"'"+pasos+)";
-            URL url = new URL(api + "agregarReceta?receta=");
+            String receta = "comida("+"'"+name+"'"+","+ingred+","+"'"+type+"'"+","+pasos+","+img+").";
+            System.out.println(receta);
+            URL url = new URL(api + "agregarReceta?receta="+receta);
             HttpURLConnection urlConnection = null;
             urlConnection = (HttpURLConnection) url.openConnection();
             BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -326,12 +348,14 @@ public class AddRecipeActivity extends AppCompatActivity {
                 b.append(input);
             }
             String resul = b.toString();
-            if (resul.equals( "Login exitoso")){
-                //callMenu(findViewById(android.R.id.content));
+            if (resul.equals( "Modified")){
+                Toast.makeText(AddRecipeActivity.this, "Agregado!", Toast.LENGTH_LONG).show();
+                nameImages.clear();
+                callMenu(findViewById(android.R.id.content));
 
             }
             else{
-                Toast.makeText(AddRecipeActivity.this, "Datos incorrectos!", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddRecipeActivity.this, "No se pudo agregar!", Toast.LENGTH_LONG).show();
 
             }
             br.close();
@@ -342,6 +366,10 @@ public class AddRecipeActivity extends AppCompatActivity {
         }
 
     }
+    public void callMenu(View v){
+        startActivity(new Intent(AddRecipeActivity.this,MenuActivity.class));
+    }
+
 }
 
 

@@ -1,12 +1,15 @@
 package com.example.apprecetas.View;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +21,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -28,7 +35,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private FloatingActionButton fl_btn_search1;
     private FloatingActionButton fl_btn_search2;
-    private Button btnLogout;
+    private Button btnPrueba;
     public static ArrayList<Receta> recetas = new ArrayList<>();
 
     private RecyclerView recyclerView;
@@ -40,7 +47,6 @@ public class MenuActivity extends AppCompatActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
         recyclerView = findViewById(R.id.list_view);
         recyclerView.setHasFixedSize(true);
 
@@ -48,15 +54,6 @@ public class MenuActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         //Botones
-        btnLogout = (Button) findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
         fl_btn_search1 = (FloatingActionButton) findViewById(R.id.search_fab2);
         fl_btn_search1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +77,7 @@ public class MenuActivity extends AppCompatActivity {
     public void onStart(){
         super.onStart();
         run();
+
     }
 
 
@@ -143,13 +141,15 @@ public class MenuActivity extends AppCompatActivity {
 
         }
         return resul;
-    }
 
+    }
     public static String conversorDirecciones(String nombreImagen){
         String head = "https://s3.us-east-2.amazonaws.com/progralenguajes/";
-        String nuevoNom = nombreImagen.replace(",",".");
-        return(head+nuevoNom+".JPG");
+
+        return(head+nombreImagen+".JPG");
 
     }
+
+
 
 }
