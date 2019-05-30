@@ -28,7 +28,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private FloatingActionButton fl_btn_search1;
     private FloatingActionButton fl_btn_search2;
-    private Button btnPrueba;
+    private Button btnLogout;
     public static ArrayList<Receta> recetas = new ArrayList<>();
 
     private RecyclerView recyclerView;
@@ -48,6 +48,15 @@ public class MenuActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         //Botones
+        btnLogout = (Button) findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
         fl_btn_search1 = (FloatingActionButton) findViewById(R.id.search_fab2);
         fl_btn_search1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +80,6 @@ public class MenuActivity extends AppCompatActivity {
     public void onStart(){
         super.onStart();
         run();
-        System.out.println(conversorDirecciones("Pollito,JPG"));
     }
 
 
