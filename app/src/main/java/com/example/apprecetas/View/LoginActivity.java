@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void callMenu(View v){
-        startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+        startActivity(new Intent(LoginActivity.this,AddRecipeActivity.class));
     }
     public void callRegistro(View v){
         startActivity(new Intent(LoginActivity.this, NewAccountActivity.class));
@@ -70,7 +70,6 @@ public class LoginActivity extends AppCompatActivity {
                 b.append(input);
             }
             String resul = b.toString();
-            System.out.println("--------------------------Resultado:"+resul);
             if (resul.equals( "Login exitoso")){
                 callMenu(findViewById(android.R.id.content));
 
