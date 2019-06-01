@@ -90,18 +90,18 @@ public class SearchActivity extends AppCompatActivity {
             String api = "https://api-receta.herokuapp.com/";
             URL url = new URL(api) ;
             if(tipo.equals("nombre")) {
-                String str=api + "buscarNombre?nombre="+nombre;
+                String str=api + "buscarNombre?nombre="+nombre+"&auth="+LoginActivity.authKey;
                 str = str.replace(" ","-");
                 url = new URL(str);
 
             }
             if(tipo.equals("tipo")) {
-                String str=api + "buscarTipo?tipo="+nombre;
+                String str=api + "buscarTipo?tipo="+nombre+"&auth="+LoginActivity.authKey;
                 str = str.replace(" ","-");
                 url = new URL(str);
             }
             if(tipo.equals("ingrediente")) {
-                String str=api + "buscarIngrediente?nombre="+nombre;
+                String str=api + "buscarIngrediente?nombre="+nombre+"&auth="+LoginActivity.authKey;
                 str = str.replace(" ","-");
                 url = new URL(str);
             }

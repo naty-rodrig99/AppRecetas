@@ -19,7 +19,7 @@ import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
     Button btn_newaccount;
-
+    public static String authKey;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,13 +70,19 @@ public class LoginActivity extends AppCompatActivity {
                 b.append(input);
             }
             String resul = b.toString();
-            if (resul.equals( "Login exitoso")){
-                callMenu(findViewById(android.R.id.content));
+            if (resul.equals( "No autenticado")){
+                Toast.makeText(LoginActivity.this, "Fallo Autenticacion!", Toast.LENGTH_LONG).show();
 
             }
-            else{
-                Toast.makeText(LoginActivity.this, "Datos incorrectos!", Toast.LENGTH_LONG).show();
-
+            else {
+                if (resul.equals("Fallo login")) {
+                    Toast.makeText(LoginActivity.this, "Datos incorrectos!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    authKey = resul;
+                    System.out.println("KEYLOGIN"+authKey);
+                    callMenu(findViewById(android.R.id.content));
+                }
             }
             br.close();
             urlConnection.disconnect();

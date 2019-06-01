@@ -31,12 +31,20 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
+
+import okhttp3.OkHttpClient;
+
 public class MenuActivity extends AppCompatActivity {
 
     private FloatingActionButton fl_btn_search1;
     private FloatingActionButton fl_btn_search2;
     private Button btnPrueba;
     public static ArrayList<Receta> recetas = new ArrayList<>();
+    public static String aws_id;
+    public static String aws_passw;
 
     private RecyclerView recyclerView;
 
@@ -47,6 +55,7 @@ public class MenuActivity extends AppCompatActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
         recyclerView = findViewById(R.id.list_view);
         recyclerView.setHasFixedSize(true);
 
@@ -76,26 +85,28 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     public void onStart(){
         super.onStart();
+        getCredenciales();
         run();
+
 
     }
 
 
     public void run() {
         try {
+
             recetas.clear();
             String api = "https://api-receta.herokuapp.com/";
-            URL url = new URL(api + "listarTodo");
-            HttpURLConnection urlConnection = null;
-            urlConnection = (HttpURLConnection) url.openConnection();
+            //String api = "http://www.recetasbambur.online/";
+            URL url = new URL(api + "listarTodo?auth="+LoginActivity.authKey);
+            HttpsURLConnection urlConnection = null;
+            urlConnection = (HttpsURLConnection) url.openConnection();
             BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             StringBuilder b = new StringBuilder();
             String input;
-
             while ((input = br.readLine()) != null){
                 b.append(input);
             }
-
             try {
                 JSONArray j = new JSONArray(b.toString());
                 int cont = 0;
@@ -149,6 +160,35 @@ public class MenuActivity extends AppCompatActivity {
         return(head+nombreImagen+".JPG");
 
     }
+
+    public static void getCredenciales() {
+        try {
+
+            String api = "https://api-receta.herokuapp.com/";
+            URL url = new URL(api + "credenciales?auth="+LoginActivity.authKey);
+
+            HttpsURLConnection urlConnection = null;
+            urlConnection = (HttpsURLConnection) url.openConnection();
+            BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            StringBuilder b = new StringBuilder();
+            String input;
+
+            while ((input = br.readLine()) != null){
+                b.append(input);
+            }
+
+            String variables = b.toString();
+            int coma = variables.indexOf(",");
+            aws_id = variables.substring(0, coma-1);
+            aws_passw = variables.substring(coma+1, variables.length());
+            br.close();
+            urlConnection.disconnect();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 

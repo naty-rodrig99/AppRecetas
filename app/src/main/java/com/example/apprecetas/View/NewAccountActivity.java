@@ -41,18 +41,7 @@ public class NewAccountActivity extends AppCompatActivity {
         String res = ed.getText().toString();
         return res;
     }
-    public boolean validateEmail(String emailStr)
-    {
-        Matcher matcher = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE).matcher(emailStr);
-        if(matcher.find())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+
     public void callLogin(View v){
         startActivity(new Intent(NewAccountActivity.this, LoginActivity.class));
     }

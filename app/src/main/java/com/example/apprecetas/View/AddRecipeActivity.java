@@ -207,13 +207,14 @@ public class AddRecipeActivity extends AppCompatActivity {
         if (s3Client == null) {
 
             ClientConfiguration clientConfig = new ClientConfiguration();
+
             clientConfig.setProtocol(Protocol.HTTPS);
 
             clientConfig.setMaxErrorRetry(0);
 
             clientConfig.setSocketTimeout(60000);
 
-            BasicAWSCredentials credentials = new BasicAWSCredentials("AKIA4MQWCJJIILNQVDEP", "4+v1M2jFsWxlmJZ2caW9C2Cr0Siu5dGgNhp5bkXp");
+            BasicAWSCredentials credentials = new BasicAWSCredentials(MenuActivity.aws_id, MenuActivity.aws_passw);
 
             s3Client = new AmazonS3Client(credentials, clientConfig);
 
@@ -332,11 +333,11 @@ public class AddRecipeActivity extends AppCompatActivity {
         String name = getNameReceta();
         String type = getTypeReceta();
         String pasos = pasosString(getPasosReceta());
-        String ingred = pasosString(getIngredientes());
+        String ingred = ingredString(getIngredientes());
         String img = nameImages.toString().replace(", ",",");
         try {
             String api = "https://api-receta.herokuapp.com/";
-            String receta = "comida("+"'"+name+"'"+","+ingred+","+"'"+type+"'"+","+pasos+","+img+").";
+            String receta = "comida("+"'"+name+"'"+","+ingred+","+"'"+type+"'"+","+pasos+","+img+")."+"&auth="+LoginActivity.authKey;
             System.out.println(receta);
             URL url = new URL(api + "agregarReceta?receta="+receta);
             HttpURLConnection urlConnection = null;
