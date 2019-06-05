@@ -48,48 +48,44 @@ public class NewAccountActivity extends AppCompatActivity {
     public void registrar(View v){
         String correo = getMail();
         String password = getPassword();
-        //if (validateEmail(correo)){
-            if(password.length()>=4){
-                try {
-                    String api = "https://api-receta.herokuapp.com/";
-                    URL url = new URL(api + "agregarUsuario?correo="+correo+"&"+"password="+password);
-                    HttpURLConnection urlConnection = null;
-                    urlConnection = (HttpURLConnection) url.openConnection();
-                    BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                    StringBuilder b = new StringBuilder();
-                    String input;
 
-                    while ((input = br.readLine()) != null){
-                        b.append(input);
-                    }
-                    String resul = b.toString();
-                    System.out.println("Resul Input:"+resul);
-                    if (resul.equals( "Usuario Registrado")){
-                        Toast.makeText(NewAccountActivity.this, "Se ha registrado satisfactoriamente.", Toast.LENGTH_LONG).show();
-                        callLogin(findViewById(android.R.id.content));
+        if(password.length()>=4){
+            try {
+                String api = "https://api-receta.herokuapp.com/";
+                URL url = new URL(api + "agregarUsuario?correo="+correo+"&"+"password="+password);
+                HttpURLConnection urlConnection = null;
+                urlConnection = (HttpURLConnection) url.openConnection();
+                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder b = new StringBuilder();
+                String input;
 
-                    }
-                    else{
-                        Toast.makeText(NewAccountActivity.this, "El usuario ya existe.", Toast.LENGTH_LONG).show();
-                        callLogin(findViewById(android.R.id.content));
-                    }
+                while ((input = br.readLine()) != null){
+                    b.append(input);
+                }
+                String resul = b.toString();
+                System.out.println("Resul Input:"+resul);
+                if (resul.equals( "Usuario Registrado")){
+                    Toast.makeText(NewAccountActivity.this, "Se ha registrado satisfactoriamente.", Toast.LENGTH_LONG).show();
+                    callLogin(findViewById(android.R.id.content));
 
-                    br.close();
-                    urlConnection.disconnect();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
+                }
+                else{
+                    Toast.makeText(NewAccountActivity.this, "El usuario ya existe.", Toast.LENGTH_LONG).show();
+                    callLogin(findViewById(android.R.id.content));
                 }
 
-            }
-            else{
-                Toast.makeText(NewAccountActivity.this, "Error: La contraseña debe tener mas de 4 digitos.",
-                        Toast.LENGTH_LONG).show();
-            }
-        }
-        //else{
-         //   Toast.makeText(NewAccountActivity.this, "Error: Formato de correo invalido.", Toast.LENGTH_LONG).show();
-        //}
+                br.close();
+                urlConnection.disconnect();
 
-    //}
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        else{
+            Toast.makeText(NewAccountActivity.this, "Error: La contraseña debe tener mas de 4 digitos.",
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
 }

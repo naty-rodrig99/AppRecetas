@@ -50,6 +50,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         image.setMinimumWidth(width);
 
         try{
+            System.out.println("---------------------------------------"+images[position]);
             Picasso.get().load(MenuActivity.conversorDirecciones(images[position])).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(image);
         }catch (Exception ex){
 
@@ -58,7 +59,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         return itemView;
     }
 
-    public void destoryItem(ViewGroup container, int position, Object object){
+    public void destroyItem(ViewGroup container, int position, Object object){
         ((ViewPager) container).removeView((View)object);
     }
 }

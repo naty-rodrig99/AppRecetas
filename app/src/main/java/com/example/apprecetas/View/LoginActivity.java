@@ -70,9 +70,13 @@ public class LoginActivity extends AppCompatActivity {
                 b.append(input);
             }
             String resul = b.toString();
-            if (resul.equals( "No autenticado")){
-                Toast.makeText(LoginActivity.this, "Fallo Autenticacion!", Toast.LENGTH_LONG).show();
-
+            if (resul.equals( "No autenticado") || resul.equals("Error")){
+                if(resul.equals( "No autenticado")){
+                    Toast.makeText(LoginActivity.this, "Fallo Autenticacion!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(LoginActivity.this, "Error de sistema!", Toast.LENGTH_LONG).show();
+                }
             }
             else {
                 if (resul.equals("Fallo login")) {

@@ -34,8 +34,7 @@ public class RecipeActivity extends AppCompatActivity {
             instrucciones = extras.getString("instrucciones");
             imagenes = extras.getString("imagenes");
         }
-        System.out.println(ingredientes);
-        System.out.println(instrucciones);
+
         img = convierteImagenes(imagenes);
         String[] finalImagenes = new String[img.size()];
         finalImagenes = img.toArray(finalImagenes);
