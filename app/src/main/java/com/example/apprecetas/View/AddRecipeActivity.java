@@ -336,6 +336,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         String pasos = pasosString(getPasosReceta());
         String ingred = ingredString(getIngredientes());
         String img = nameImages.toString().replace(", ",",");
+        System.out.println("---------------IMAG:"+img);
         try {
             String api = "https://api-receta.herokuapp.com/";
             String receta = "comida("+"'"+name+"'"+","+ingred+","+"'"+type+"'"+","+pasos+","+img+")."+"&auth="+LoginActivity.authKey;
