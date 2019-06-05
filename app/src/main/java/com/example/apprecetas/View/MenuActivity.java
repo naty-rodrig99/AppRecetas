@@ -179,8 +179,10 @@ public class MenuActivity extends AppCompatActivity {
 
             String variables = b.toString();
             int coma = variables.indexOf(",");
-            aws_id = variables.substring(0, coma-1);
+            aws_id = variables.substring(0, coma);
             aws_passw = variables.substring(coma+1, variables.length());
+            System.out.println(aws_id);
+            System.out.println(aws_passw);
             br.close();
             urlConnection.disconnect();
 
