@@ -213,9 +213,9 @@ public class AddRecipeActivity extends AppCompatActivity {
             clientConfig.setMaxErrorRetry(0);
 
             clientConfig.setSocketTimeout(60000);
-
+            System.out.println("uno:"+MenuActivity.aws_id+",dos:"+ MenuActivity.aws_passw);
             BasicAWSCredentials credentials = new BasicAWSCredentials(MenuActivity.aws_id, MenuActivity.aws_passw);
-
+            System.out.println("uno:"+MenuActivity.aws_id+",dos:"+ MenuActivity.aws_passw);
             s3Client = new AmazonS3Client(credentials, clientConfig);
 
             s3Client.setRegion(Region.getRegion(Regions.US_EAST_2));
@@ -236,7 +236,6 @@ public class AddRecipeActivity extends AppCompatActivity {
 
             PutObjectRequest putObjectRequest = new PutObjectRequest("progralenguajes",  fileName + "." + "JPG", stream, objectMetadata).withCannedAcl(CannedAccessControlList.PublicRead);
             PutObjectResult result = s3Client.putObject(putObjectRequest);
-            //Toast.makeText(AddRecipeActivity.this, "Imagen cargada con exito!", Toast.LENGTH_LONG).show();
             nameImages.add("'"+fileName+"'");
             if (result == null) {
 
@@ -310,6 +309,8 @@ public class AddRecipeActivity extends AppCompatActivity {
     public String ingredString(String s){
         int cont = 0;
         String acu ="";
+        s.replace(", ",",");
+        s.replace(" ,",",");
         ArrayList<String> arr = new ArrayList<>();
         while(cont< s.length()){
             if(s.charAt(cont) != ','){
