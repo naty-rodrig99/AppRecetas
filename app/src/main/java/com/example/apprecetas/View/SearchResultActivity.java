@@ -159,5 +159,5 @@ public class SearchResultActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    
+
 }
