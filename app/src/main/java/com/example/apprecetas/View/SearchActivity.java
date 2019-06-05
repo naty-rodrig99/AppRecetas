@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,15 +12,6 @@ import android.widget.Toast;
 
 import com.example.apprecetas.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
@@ -56,9 +46,6 @@ public class SearchActivity extends AppCompatActivity {
                 intent.putExtra("tipo", result);
                 startActivity(intent);
 
-                //String result = "Selecciono: ";
-                //result += (nombre.isChecked())?"Nombre":(tipo.isChecked())?"Tipo":(ingrediente.isChecked())?"Ingrediente":"";
-                //Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -81,89 +68,6 @@ public class SearchActivity extends AppCompatActivity {
                 break;
         }
         Toast.makeText(getApplicationContext(),str,Toast.LENGTH_SHORT).show();
-    }
-
-    public void resultadoBusqueda(final String nombre, final String tipo){
-        resultado.clear();
-
-        try {
-            String api = "https://api-receta.herokuapp.com/";
-            URL url = new URL(api) ;
-            if(tipo.equals("nombre")) {
-                String str=api + "buscarNombre?nombre="+nombre+"&auth="+LoginActivity.authKey;
-                str = str.replace(" ","-");
-                url = new URL(str);
-
-            }
-            if(tipo.equals("tipo")) {
-                String str=api + "buscarTipo?tipo="+nombre+"&auth="+LoginActivity.authKey;
-                str = str.replace(" ","-");
-                url = new URL(str);
-            }
-            if(tipo.equals("ingrediente")) {
-                String str=api + "buscarIngrediente?nombre="+nombre+"&auth="+LoginActivity.authKey;
-                str = str.replace(" ","-");
-                url = new URL(str);
-            }
-
-            HttpURLConnection urlConnection = null;
-            urlConnection = (HttpURLConnection) url.openConnection();
-            BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            StringBuilder b = new StringBuilder();
-            String input;
-
-            while ((input = br.readLine()) != null){
-                b.append(input);
-            }
-
-            try {
-                JSONArray j = new JSONArray(b.toString());
-
-                int cont = 0;
-                String nom ="";
-                String type="";
-                Receta recipe = new Receta();
-                while(cont< j.length()) {
-                    JSONObject o = j.getJSONObject(cont);      //Prueba de recibir el JSON
-                    if (!tipo.equals("nombre")) {
-                        nom = (String) o.get("NOM");
-
-                    }
-                    ArrayList ing = MenuActivity.convertidorArrays((JSONArray)o.get("ING"));
-
-                    if(!tipo.equals("tipo")) {
-                        type = (String) o.get("TYPE");
-                    }
-                    ArrayList steps = MenuActivity.convertidorArrays((JSONArray)o.get("STEPS"));
-                    ArrayList img = MenuActivity.convertidorArrays((JSONArray)o.get("IMAGES"));
-                    if(tipo.equals("ingrediente")) {
-                        recipe = new Receta(nom, ing, type, steps, img);
-                        System.out.println(recipe);
-                    }
-                    if(tipo.equals("nombre")) {
-                        recipe = new Receta(nombre, ing, type, steps, img);
-
-                    }
-                    if(tipo.equals("tipo")) {
-                        recipe = new Receta(nom, ing, tipo, steps, img);
-
-                    }
-
-                    resultado.add(recipe);
-                    cont++;
-                }
-
-
-            } catch (JSONException e) {
-                Log.e("MYAPP", "unexpected JSON exception", e);
-            }
-            br.close();
-            urlConnection.disconnect();
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
