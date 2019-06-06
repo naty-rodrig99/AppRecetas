@@ -1,15 +1,12 @@
 package com.example.apprecetas.View;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,27 +18,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSession;
-
-import okhttp3.OkHttpClient;
 
 public class MenuActivity extends AppCompatActivity {
 
     private FloatingActionButton fl_btn_search1;
     private FloatingActionButton fl_btn_search2;
-    private Button btnPrueba;
+    private Button btnLogout;
     public static ArrayList<Receta> recetas = new ArrayList<>();
     public static String aws_id;
     public static String aws_passw;
@@ -77,6 +65,15 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuActivity.this, AddRecipeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnLogout = (Button) findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
